@@ -1,37 +1,16 @@
-function Tab(name) {
-    this.name = name;
-    this.todos = [];
-}
-
-function Todo(name, date, priority, status) {
-    this.name = name
-    this.date = date
-    this.priority = priority
-    this.status = status;
-}
-
-//selectors main area
-const todoInput = document.querySelector('.todo-input');
-const todoDateInput = document.querySelector('.todo-date-input');
-const todoPriorityInput = document.querySelector('.priority-select')
-const todoButton = document.querySelector('.todo-button');
-const todoList = document.querySelector('.todo-list');
-const filterOption = document.querySelector('.filter-todo');
-
-//selectors tab area
-const addTabButton = document.querySelector('.tab-button');
-const TabList = document.querySelector('.tab-list');
-const tab = document.querySelectorAll('.tab');
+import { Tab, Todo } from "./constructors";
+import selectors from "./selectors";
+let tabs;
 
 //event listeners
 document.addEventListener('DOMContentLoaded', loadTabs);
 document.addEventListener('DOMContentLoaded', activateTab);
 document.addEventListener('DOMContentLoaded', getTodayDate);
-todoButton.addEventListener('click', addTodo);
-todoList.addEventListener('click', deleteCheck);
-filterOption.addEventListener('click', filterTodo);
-addTabButton.addEventListener('click', createTab);
-TabList.addEventListener('click', deleteSelectTab);
+selectors.todoButton.addEventListener('click', addTodo);
+selectors.todoList.addEventListener('click', deleteCheck);
+selectors.filterOption.addEventListener('click', filterTodo);
+selectors.addTabButton.addEventListener('click', createTab);
+selectors.tabList.addEventListener('click', deleteSelectTab);
 
 //functions
 function addTodo(event) {
@@ -44,9 +23,9 @@ function addTodo(event) {
 
     // todo object instantiation
 
-    let name = todoInput.value;
-    let date = todoDateInput.value;
-    let priority = todoPriorityInput.value;
+    let name = selectors.todoInput.value;
+    let date = selectors.todoDateInput.value;
+    let priority = selectors.todoPriorityInput.value;
     let newtodoobj = new Todo(name, date, priority);
 
 
@@ -93,10 +72,10 @@ function addTodo(event) {
     todoDiv.appendChild(trashButton);
 
     // append to list
-    todoList.appendChild(todoDiv);
+    selectors.todoList.appendChild(todoDiv);
     // clear todo input value
-    todoInput.value = '';
-    todoDateInput.value = '';
+    selectors.todoInput.value = '';
+    selectors.todoDateInput.value = '';
 }
 
 function saveTodosinTab(todo) {
@@ -134,7 +113,7 @@ function deleteCheck(event) {
 }
 
 function filterTodo(event) {
-    const todos = todoList.childNodes;
+    const todos = selectors.todoList.childNodes;
     todos.forEach(function(todo) {
         switch(event.target.value) {
             case 'all':
@@ -212,7 +191,7 @@ function getTodos() {
                 todoDiv.appendChild(trashButton);
         
                 // append to list
-                todoList.appendChild(todoDiv);
+                selectors.todoList.appendChild(todoDiv);
             })
         }
     })
@@ -258,7 +237,7 @@ function createTab(event) {
     newTrashcanDiv.appendChild(newTrashButton);
     newTab.appendChild(newDiv);
     newTab.appendChild(newTrashcanDiv);
-    TabList.appendChild(newTab);   
+    selectors.tabList.appendChild(newTab);   
     
     activateTab();
 
@@ -329,7 +308,7 @@ function loadTabs() {
         newTrashcanDiv.appendChild(newTrashButton);
         newTab.appendChild(newDiv);
         newTab.appendChild(newTrashcanDiv);
-        TabList.appendChild(newTab);   
+        selectors.tabList.appendChild(newTab);   
     })
 }
 
@@ -345,9 +324,9 @@ function removeLocalTab(tab) {
 
 function activateTab() {
     
-    if(TabList.childNodes[0] === undefined) return;
+    if(selectors.tabList.childNodes[0] === undefined) return;
     else {
-        TabList.childNodes[0].classList.add('tab-active');    
+        selectors.tabList.childNodes[0].classList.add('tab-active');    
         getTodos();
     }
 }
