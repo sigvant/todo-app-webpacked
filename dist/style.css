@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box;    
 }
 
 #content {
@@ -88,7 +88,6 @@ form button:hover {
 .todo-list {
     min-width: 80%;
     list-style: none;
-    
 }
 
 .todo {
@@ -214,6 +213,7 @@ select {
     margin: 0.5rem;
     font-size: 20px;
     align-self: flex-end;
+    display: block;
 }
 
 #tab-area {
@@ -305,4 +305,8 @@ span {
     color: black;
     box-shadow: 0 0 4px 4px silver;
     transition: all 0.3s ease;
+}
+
+#scroll-div {
+    overflow-y: auto;
 }
