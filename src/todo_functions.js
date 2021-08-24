@@ -236,9 +236,14 @@ function createTab(event) {
     newTrashcanDiv.appendChild(newTrashButton);
     newTab.appendChild(newDiv);
     newTab.appendChild(newTrashcanDiv);
-    selectors.tabList.appendChild(newTab);   
+    selectors.tabList.appendChild(newTab); 
     
-    activateTab();
+    let onlyTab = document.querySelector('.tab')
+    
+    if(onlyTab.parentElement.childNodes.length === 1) {
+        onlyTab.classList.add('tab-active');
+        return
+    } 
 
 }
 
@@ -251,7 +256,10 @@ function deleteSelectTab(event) {
     if(item.classList[0] === 'trash-btn-tab' || item.classList[0] === 'trash-btn' ) {
         const tab = item.parentElement.parentElement;
         // does not allow deletion when only one tab
-        if(tab.parentElement.childNodes.length === 1) return;
+        if(tab.parentElement.childNodes.length === 1) {
+            // item.classList.add('tab-active');
+            return
+        }   
         // animation
         tab.classList.add('fall');
         removeLocalTab(tab);
@@ -299,7 +307,7 @@ function loadTabs() {
         let newTrashcanDiv = document.createElement('div');
         newTrashcanDiv.classList.add('trashcan-div')
         let newTrashButton = document.createElement('button');
-        newTrashButton.classList.add('trash-btn');
+        newTrashButton.classList.add('trash-btn-tab');
         newTrashButton.textContent = '🗑️';
         
         newSpanDiv.appendChild(newSpan);
